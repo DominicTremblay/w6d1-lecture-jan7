@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Character from './Character';
 
-class CharacterList extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -15,16 +14,22 @@ class CharacterList extends Component {
   }
 
   render() {
-    const charactersList = this.state.characters.map(charObj => (
-      <Character key={charObj.name} charName={charObj.name} />
-    ));
-
-    return (
-      <div>
-        <h1 className="title">My Favorites characters</h1>
-        <ul>{charactersList}</ul>
-      </div>
+    const charactersList = this.state.characters.map(charObj =>
+      React.createElement('li', { key: charObj.name }, charObj.name)
     );
+
+    const reactElement = React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        { className: 'title' },
+        'My Favorites characters'
+      ),
+      React.createElement('ul', null, charactersList)
+    );
+
+    return reactElement;
   }
 }
-export default CharacterList;
+export default App;
